@@ -10,28 +10,31 @@
 </head>
 
 <body>
-<div id="fileButtons">
-    <div id="buttonsHeader" style="display: inline-block;">
-        <div style="margin: 10px; display: flex; gap: 10px;">
-            <div id="planetButtons">
-                <button data-file="lunar">Lunar</button>
-                <button data-file="europa">Europa</button>
-                <button data-file="mars">Mars</button>
-                <button data-file="mimas">Mimas</button>
-                <button data-file="venus">Venus</button>
-                <button data-file="vulcan">Vulcan</button>
-            </div>
+<div class="flex flex-row justify-center">
+    <div>
+        <h1 class="text-4xl mt-4">Stationeers Maps</h1>
+    </div>
+</div>
 
-            <div id="regionTypeButtons" style="margin-left: auto; display: flex; gap: 10px;">
-                <button data-region="mining">Mining</button>
-                <button data-region="names">Names</button>
-                <button data-region="poi">POI</button>
-            </div>
+<div class="flex flex-row justify-center mt-5 mb-5 pl-10 pr-10">
+    <div id="buttonsHeader" class="w-full grid md:grid-cols-2 md:gap-4">
+        <div id="planetButtons">
+            <button data-file="lunar">Lunar</button>
+            <button data-file="europa">Europa</button>
+            <button data-file="mars">Mars</button>
+            <button data-file="mimas">Mimas</button>
+            <button data-file="venus">Venus</button>
+            <button data-file="vulcan">Vulcan</button>
+        </div>
+
+        <div id="regionTypeButtons" class="mt-5 md:mt-0">
+            <button data-region="mining">Mining</button>
+            <button data-region="names">Names</button>
+            <button data-region="poi">POI</button>
         </div>
     </div>
-    <div style="display: inline-block; margin-left: 20px; gap: 10px;">
-        <button id="share" title="Share view"
-                style="height: 40px; width: 40px; vertical-align: middle; display: inline-flex; align-items: center; justify-content: center;">
+    <div>
+        <button id="share" title="Share view">
             <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20"
                  viewBox="0 0 512 512">
                 <!--!Font Awesome Free v7.1.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free Copyright 2025 Fonticons, Inc.-->
@@ -42,7 +45,7 @@
     </div>
 </div>
 
-<div id="root" style="display: flex; align-items: flex-start;">
+<div id="root" class="flex flex-row justify-center mb-10 pl-10 pr-10">
     <div id="canvasContainer" style="position: relative;">
         <svg id="svg" style="position: absolute; top: 0; left: 0;"></svg>
         <div id="iconLayer"
@@ -50,18 +53,18 @@
         </div>
     </div>
 
-    <div id="sidePane" style="margin-left: 20px;">
-        <label style="display: block; margin-top: 10px;">
+    <div id="sidePane" class="ml-20">
+        <label class="mt-10 block">
             <input type="checkbox" id="toggleTerrain" checked> Terrain
         </label>
-        <label style="display: block;">
+        <label class="block">
             <input type="checkbox" id="toggleSpawn"> Start Locations
         </label>
-        <label style="display: block;">
+        <label class="block">
             <input type="checkbox" id="toggleNorth"> North Up
         </label>
 
-        <label style="display: block; margin-top: 20px; margin-bottom: 5px;">Regions</label>
+        <label class="block mt-10">Regions</label>
         <div id="colorFilter"></div>
     </div>
 
