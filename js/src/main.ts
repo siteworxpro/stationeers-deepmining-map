@@ -298,7 +298,7 @@ async function loadMap(planet: string, regionType: string) {
             .style("top", (event.pageY + 20) + "px")
             .html(`
               <strong>X:</strong> ${x} <br/>
-              <strong>Y:</strong> ${y} <br/>`)
+              <strong>Z:</strong> ${y} <br/>`)
     })
 
     function addCompass() {
