@@ -27,6 +27,12 @@ jobs:
         with:
           node-version: '24'
 
+      - name: 🪄 Update base path in config
+        run: |
+          echo "🔍 Updating base path in config..."
+          sed -i 's|base: "/"|base: "/stationeers-deepmining-map/"|' js/vite.config.js
+          echo "✅ Base path updated"
+
       - name: "📦 Install dependencies & Build (js) 🔧"
         run: |
           echo "🔍 Entering js directory..."
