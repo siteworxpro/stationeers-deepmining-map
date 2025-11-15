@@ -1,54 +1,131 @@
 @import "tailwindcss";
 
-body, html {
-    font-family: sans-serif;
+/* Light-mode defaults */
+:root {
+    --bg: #ffffff;
+    --text: #222222;
+    --muted: #6b6b6b;
+    --accent: #4CAF50;
+    --accent-hover: #45a049;
+    --accent-active: #3e8e41;
+    --button-text: #ffffff;
+    --path-stroke: #333333;
+    --svg-text-fill: #111111;
+    --tooltip-bg: rgba(240,240,240,0.95);
+    --side-bg: #f3f3f3;
+    --shadow: 0 4px 8px rgba(0, 0, 0, 0.08);
+    --side-padding: 1.3rem;
 }
 
+/* Respect system preference when no explicit class is set */
+@media (prefers-color-scheme: dark) {
+    :root {
+        --bg: #222222;
+        --text: #cdcdcd;
+        --muted: #9a9a9a;
+        --accent: #4CAF50;
+        --accent-hover: #45a049;
+        --accent-active: #3e8e41;
+        --button-text: #ffffff;
+        --path-stroke: #333333;
+        --svg-text-fill: #111111;
+        --tooltip-bg: rgba(40,40,40,0.95);
+        --side-bg: #3e3e3e;
+        --shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    }
+}
+
+/* Class-based override: add .dark or .light to root element to force mode */
+.dark {
+    --bg: #222222;
+    --text: #cdcdcd;
+    --muted: #9a9a9a;
+    --tooltip-bg: rgba(40,40,40,0.95);
+    --side-bg: #3e3e3e;
+    --shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+}
+
+.light {
+    --bg: #ffffff;
+    --text: #222222;
+    --muted: #6b6b6b;
+    --tooltip-bg: rgba(240,240,240,0.95);
+    --side-bg: #f3f3f3;
+    --shadow: 0 4px 8px rgba(0, 0, 0, 0.08);
+}
+
+/* Base layout */
+body, html {
+    height: 100%;
+    font-family: sans-serif;
+    background-color: var(--bg);
+    color: var(--text);
+    margin: 0;
+    padding: 0;
+    transition: background-color 200ms ease, color 200ms ease;
+}
+
+/* Buttons */
 button {
-    background-color: #4CAF50; /* Green background */
-    color: white; /* White text */
-    padding: 5px 10px; /* Padding around the text */
-    border: none; /* Remove default border */
-    border-radius: 8px; /* Rounded corners */
-    cursor: pointer; /* Change cursor to pointer on hover */
-    font-size: 12px; /* Larger font size */
-    font-weight: bold; /* Bold text */
-    text-align: center; /* Center the text */
-    text-decoration: none; /* Remove underline from text */
-    display: inline-block; /* Allow padding and margin to be applied */
-    transition: background-color 0.3s ease; /* Smooth transition for hover effect */
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); /* Subtle shadow for depth */
+    margin-top: 2px;
+    margin-bottom: 2px;
+    width: 100px;
+    background-color: var(--accent);
+    color: var(--button-text);
+    padding: 5px 10px;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    font-size: 12px;
+    font-weight: bold;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    transition: background-color 0.2s ease, box-shadow 0.2s ease, transform 0.06s ease;
+    box-shadow: var(--shadow);
 }
 
 button:hover {
-    background-color: #45a049; /* Darker green on hover */
-    box-shadow: 0 6px 12px rgba(0, 0, 0, 0.3); /* Slightly larger shadow on hover */
+    background-color: var(--accent-hover);
+    box-shadow: 0 6px 12px rgba(0, 0, 0, 0.12);
 }
 
 button:active {
-    background-color: #3e8e41; /* Even darker green when clicked */
-    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2); /* Smaller shadow when active */
-    transform: translateY(2px); /* Slight downward movement when active */
+    background-color: var(--accent-active);
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.12);
+    transform: translateY(2px);
 }
 
-
+/* SVG / graph styling */
 path {
-    stroke: #333;
+    stroke: var(--path-stroke);
     stroke-width: 1px;
     cursor: pointer;
 }
 
 text {
     font-size: 10px;
-    fill: #111;
+    fill: var(--svg-text-fill);
     pointer-events: none;
 }
 
+/* Tooltips */
 .tooltip {
     position: absolute;
-    background: lightgray;
+    background: var(--tooltip-bg);
+    color: var(--text);
     padding: 5px;
     font-size: 12px;
     pointer-events: none;
     opacity: 0;
+    transition: opacity 150ms ease, transform 150ms ease;
+}
+
+/* Side pane */
+#sidePane {
+    background-color: var(--side-bg);
+    padding: var(--side-padding);
+    box-shadow: var(--shadow);
+    border-radius: 8px;
+    transition: background-color 200ms ease, box-shadow 200ms ease;
 }

@@ -10,6 +10,7 @@ https://github.com/aproposmath/stationeers-deepmining-map
 - Updated to use vite and add docker support.
 - Code updated to typeScript.
 - tailwindcss added for styling.
+- light and dark mode support.
 
 Running Stationeers Deep Mining Map in Docker
 ```shell
@@ -18,7 +19,7 @@ docker run --rm -p 8080:80 siteworxpro/stationeers-deepmining-map:latest
 
 You can access the application at: [http://localhost:8080](http://localhost:8080)
 
-![Deep Mining Map Screenshot](docs/map.png)
+![Deep Mining Map Screenshot](docs/map.gif)
 
 ### Running Locally
 

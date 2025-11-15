@@ -4,23 +4,13 @@ import './style.css'
 
 import type {ExtendedTopology, IconsData, Planet} from './types'
 import type {BaseType} from "d3";
-
-const PLAYER_ICON_URL: string = "icon_transparent.webp"
-const AUTOLATHE_ICON_URL: string = "https://stationeers-wiki.com/images/8/85/StructureAutolathe_BuildState4.png"
+import {themeToggle, container, toggleTerrain, toggleSpawn, toggleNorth, fileButtons, sidePane, root} from "./elements";
+import {AUTOLATHE_ICON_URL, PLAYER_ICON_URL} from "./constants";
+import {onClickThemeToggle} from "./theme";
 
 const svg = d3.select("#svg")
 const tooltip = d3.select("#tooltip")
 const colorFilter = d3.select("#colorFilter")
-
-const container = document.getElementById("canvasContainer")
-const buttonsHeader = document.getElementById("buttonsHeader")
-const iconLayer = document.getElementById("iconLayer")
-const toggleTerrain = document.getElementById('toggleTerrain') as HTMLInputElement
-const toggleSpawn = document.getElementById('toggleSpawn') as HTMLInputElement
-const toggleNorth = document.getElementById('toggleNorth') as HTMLInputElement
-const sidePane = document.getElementById('sidePane')
-const fileButtons = document.getElementById('fileButtons')
-const root = document.getElementById('root')
 
 function setCanvasSize(width: number, height: number) {
     console.log("Setting canvas size:", width, height)
@@ -34,16 +24,6 @@ function setCanvasSize(width: number, height: number) {
         container.style.height = `${height}px`
         svg.setAttribute("width", String(width))
         svg.setAttribute("height", String(height))
-    }
-
-    // Update other related elements if needed
-    if (iconLayer) {
-        iconLayer.style.width = `${width}px`
-        iconLayer.style.height = `${height}px`
-    }
-
-    if (buttonsHeader) {
-        buttonsHeader.style.width = `${width}px`
     }
 }
 
@@ -548,6 +528,8 @@ let selectedRegions = [0]
 let northUp = false
 let mapWidth = 4000
 let mapHeight = 4000
+
+themeToggle?.addEventListener('click', onClickThemeToggle)
 
 let updateRender = () => {
 }
