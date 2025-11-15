@@ -80,7 +80,7 @@ function applySettingsFromQuery(params: URLSearchParams) {
     const selectedRegionsString = params.get('selected') || getFromLocalStorage('selectedRegions', '0')
     selectedRegions = selectedRegionsString.split('-').map(s => parseInt(s))
 
-    let northUpParam = params.get("rotate") || getFromLocalStorage('northUp', '0')
+    let northUpParam = params.get("rotate") || getFromLocalStorage('rotate', '0')
     toggleNorth.checked = northUpParam === '1'
 
     isEmbed = params.get('embed') === '1'
@@ -529,7 +529,7 @@ const height = +svg.attr("height")
 let currentPlanet = params.get('planet') || getFromLocalStorage('planet', 'lunar')
 let currentRegionType = params.get('region') || getFromLocalStorage('region', 'mining')
 let selectedRegions = [0]
-let northUp = false
+let northUp = getFromLocalStorage('rotate', '0') === '1'
 let mapWidth = 4000
 let mapHeight = 4000
 
@@ -577,7 +577,7 @@ d3.select("#toggleSpawn").on("change", () => {
 })
 d3.select("#toggleNorth").on("change", () => {
     northUp = d3.select("#toggleNorth").property("checked")
-    saveToLocalStorage('northUp', northUp ? '1' : '0')
+    saveToLocalStorage('rotate', northUp ? '1' : '0')
     loadMap(currentPlanet, currentRegionType).then(() => {})
 })
 d3.select("#share").on("click", () => {

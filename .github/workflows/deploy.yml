@@ -3,8 +3,6 @@ name: "🚀✨ Deploy Static Website to GitHub Pages 🌐🎉"
 on:
   workflow_dispatch: { }
   push:
-    paths:
-      - './js/**'
     branches:
       - main
 
