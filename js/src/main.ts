@@ -40,6 +40,10 @@ let render = () => {}
 const zoom = d3.zoom()
     .scaleExtent([1, 100])
     .on("zoom", (event) => {
+        console.log("Zoom event:", event.transform)
+        saveToLocalStorage("zoom", event.transform.k)
+        saveToLocalStorage("x", event.transform.x)
+        saveToLocalStorage("y", event.transform.y)
         const groups = ["mining", "names", "poi", "spawn", "imageGroup"]
         groups.forEach(group => svg.select(`.${group}`).attr("transform", event.transform))
         updateIconPositions()
@@ -93,9 +97,9 @@ function applySettingsFromQuery(params: URLSearchParams) {
     toggleSpawn.checked = (params.get('spawn') || getFromLocalStorage('spawn', '1')) === '1'
     toggleNorth.checked = (params.get("rotate") || getFromLocalStorage('rotate', '0')) === '1'
 
-    const scale = parseFloat(params.get('zoom') ?? '1')
-    const x = parseFloat(params.get('x') ?? '0')
-    const y = parseFloat(params.get('y') ?? '0')
+    const scale = parseFloat(params.get('zoom') ?? getFromLocalStorage('zoom', '1'))
+    const x = parseFloat(params.get('x') ?? getFromLocalStorage('x', '0'))
+    const y = parseFloat(params.get('y') ?? getFromLocalStorage('y', '0'))
     if (!isNaN(scale) && !isNaN(x) && !isNaN(y)) {
         // @ts-ignore
         svg.call(zoom.transform, d3.zoomIdentity.translate(x, y).scale(scale))
