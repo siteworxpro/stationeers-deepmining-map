@@ -18,16 +18,16 @@ Running Stationeers Deep Mining Map in Docker
 docker run --rm -p 8080:80 siteworxpro/stationeers-deepmining-map:latest
 ```
 
-You can access the application at: [http://localhost:8080](http://localhost:8080)
+You can access the map at: [http://localhost:8080](http://localhost:8080)
 
 ![Deep Mining Map Screenshot](docs/map.gif)
 
-### Running Locally
+### Developing Locally
 
-To run the Stationeers Deep Mining Map locally, follow these steps:
+To run the Stationeers Deep Mining Map locally for development, follow these steps:
 
 ```bash
-git clone https://github.com/aproposmath/stationeers-deepmining-map.git
+git clone https://github.com/siteworxpro/stationeers-deepmining-map.git
 cd stationeers-deepmining-map/js
 nvm install && nvm use
 npm i && npm run dev
