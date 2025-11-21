@@ -26,6 +26,8 @@ jobs:
         uses: actions/setup-node@v3
         with:
           node-version: '24'
+          cache: 'npm'
+          cache-dependency-path: 'js/package-lock.json'
 
       - name: "📦 Install dependencies & Run Lint 🔧"
         run: |
