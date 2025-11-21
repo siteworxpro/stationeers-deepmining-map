@@ -30,9 +30,8 @@ jobs:
           cache-dependency-path: 'js/package-lock.json'
 
       - name: "📦 Install dependencies & Run Lint 🔧"
+        working-directory: js
         run: |
-          echo "🔍 Entering js directory..."
-          cd js
           echo "⬇️ Installing dependencies..."
           npm ci
           echo "🏗️ Running report..."
