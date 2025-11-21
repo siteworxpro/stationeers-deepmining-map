@@ -22,20 +22,23 @@ jobs:
       - name: "🔁 Checkout repository"
         uses: actions/checkout@v4
 
-      - name: "⚙️ Setup Node.js 20"
-        uses: actions/setup-node@v4
+      - name: "🧰 Setup Node.js v24"
+        uses: actions/setup-node@v3
         with:
-          node-version: '20'
-          cache: 'npm'
+          node-version: '24'
 
-      - name: "📦 Install dependencies"
-        run: cd js && npm ci
-
-      - name: "🧾 Produce ESLint JSON report"
-        run: npx eslint . --ext .js,.ts -f json -o eslint-report.json || true
-
-      - name: "💥 Fail on any warnings or errors"
-        run: npx eslint . --ext .js,.ts --max-warnings=0
+      - name: "📦 Install dependencies & Run Lint 🔧"
+        run: |
+          echo "🔍 Entering js directory..."
+          cd js
+          echo "⬇️ Installing dependencies (production only)..."
+          npm ci
+          echo "🏗️ Running report..."
+          npx eslint . --ext .js,.ts -f json -o eslint-report.json || true
+          echo "✅ ESLint report generated"
+          echo "💥 Fail on any warnings or errors"
+          npx eslint . --ext .js,.ts --max-warnings=0 || exit 1
+          echo "✅ Lint complete"
 
       - name: "📁 Upload ESLint report"
         uses: actions/upload-artifact@v4
