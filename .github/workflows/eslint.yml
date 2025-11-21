@@ -34,10 +34,10 @@ jobs:
           echo "⬇️ Installing dependencies..."
           npm ci
           echo "🏗️ Running report..."
-          npx eslint . --ext .js,.ts -f json -o eslint-report.json || true
+          npx eslint . -f json -o eslint-report.json || true
           echo "✅ ESLint report generated"
           echo "💥 Fail on any warnings or errors"
-          npx eslint . --ext .js,.ts --max-warnings=0 || exit 1
+          npx eslint . --max-warnings=0 || exit 1
           echo "✅ Lint complete"
 
       - name: "📁 Upload ESLint report"
