@@ -1,4 +1,4 @@
-name: "🧹 ESLint Sweep — Node 20"
+name: "🧹 ESLint Sweep"
 
 on:
   push:
@@ -13,7 +13,7 @@ concurrency:
 
 jobs:
   lint:
-    name: "🔎 Lint — Node 20"
+    name: "🔎 Lint"
     runs-on: ubuntu-latest
     env:
       CI: 'true'
@@ -31,7 +31,7 @@ jobs:
         run: |
           echo "🔍 Entering js directory..."
           cd js
-          echo "⬇️ Installing dependencies (production only)..."
+          echo "⬇️ Installing dependencies..."
           npm ci
           echo "🏗️ Running report..."
           npx eslint . --ext .js,.ts -f json -o eslint-report.json || true
@@ -44,4 +44,4 @@ jobs:
         uses: actions/upload-artifact@v4
         with:
           name: eslint-report
-          path: eslint-report.json
+          path: js/eslint-report.json
