@@ -11,7 +11,7 @@ import {getFromLocalStorage, saveToLocalStorage} from "./localstorage.ts";
 
 // Modal
 import {closeModal, openModal} from './modal';
-;(window as any).closeModal = closeModal;
+;(window as unknown as Window & { closeModal: typeof closeModal }).closeModal = closeModal;
 
 // State variables
 const params = new URLSearchParams(window.location.search)
@@ -258,7 +258,7 @@ function setupMouseHandlers() {
         const svgX = (mouseX - transform.x) / transform.k
         const svgY = (mouseY - transform.y) / transform.k
 
-        let [x, y] = normalizeCoordinate(
+        const [x, y] = normalizeCoordinate(
             Math.round((svgX / canvasHeight - 0.5) * mapWidth),
             Math.round((0.5 - svgY / canvasHeight) * mapHeight)
         )

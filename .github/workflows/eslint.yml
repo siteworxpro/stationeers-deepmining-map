@@ -1,0 +1,44 @@
+name: "🧹 ESLint Sweep — Node 20"
+
+on:
+  push:
+    branches: [ main, master, develop ]
+  pull_request:
+    types: [ opened, synchronize, reopened ]
+  workflow_dispatch: {}
+
+concurrency:
+  group: eslint-sweep-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  lint:
+    name: "🔎 Lint — Node 20"
+    runs-on: ubuntu-latest
+    env:
+      CI: 'true'
+
+    steps:
+      - name: "🔁 Checkout repository"
+        uses: actions/checkout@v4
+
+      - name: "⚙️ Setup Node.js 20"
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+          cache: 'npm'
+
+      - name: "📦 Install dependencies"
+        run: cd js && npm ci
+
+      - name: "🧾 Produce ESLint JSON report"
+        run: npx eslint . --ext .js,.ts -f json -o eslint-report.json || true
+
+      - name: "💥 Fail on any warnings or errors"
+        run: npx eslint . --ext .js,.ts --max-warnings=0
+
+      - name: "📁 Upload ESLint report"
+        uses: actions/upload-artifact@v4
+        with:
+          name: eslint-report
+          path: eslint-report.json
