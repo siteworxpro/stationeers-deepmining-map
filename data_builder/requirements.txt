@@ -1,5 +1,5 @@
 Pillow
 numpy
 lxml
-GDAL==3.11.5
+GDAL==3.12.1
 topojson

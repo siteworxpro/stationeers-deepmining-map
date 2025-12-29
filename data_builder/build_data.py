@@ -252,11 +252,16 @@ worlds = {
 
 if __name__ == "__main__":
     if len(sys.argv) < 2:
-        base_dir = Path(
-            "~/.sa/Stationeers/rocketstation_Data/StreamingAssets/Worlds"
-        ).expanduser()
-    else:
-        base_dir = Path(sys.argv[1])
+        print("Usage: python build_data.py <base_directory>")
+        sys.exit(1)
+
+    base_dir = Path(sys.argv[1])
+    if not base_dir.is_absolute():
+        base_dir = (Path.cwd() / base_dir).resolve().absolute()
+
+    if not base_dir.exists():
+        print(f"Base directory {base_dir} does not exist.")
+        sys.exit(1)
 
     threads = []
     for w in worlds:
