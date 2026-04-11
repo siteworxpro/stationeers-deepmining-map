@@ -3,26 +3,29 @@
 
 <head>
     <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>Stationeers Maps</title>
     <link rel="icon" type="image/webp" href="/images/icon_transparent.webp">
     <link rel="stylesheet" href="node_modules/@fortawesome/fontawesome-free/css/all.min.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;600;700;900&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
 </head>
 
 <body class="dark">
 
-
+<!-- Modal -->
 <div id="modal-container" class="hidden">
     <div class="shade"></div>
     <div class="modal">
-        <div class="modal-header flex justify-between items-center">
-            <h2 class="text-2xl modal-header-content"></h2>
+        <div class="modal-header">
+            <h2 class="modal-title modal-header-content"></h2>
             <button class="close-button" onclick="closeModal()">
                 <i class="fa-solid fa-times"></i>
             </button>
         </div>
-        <div class="modal-content">
-        </div>
-        <div class="modal-footer flex justify-end mt-5">
+        <div class="modal-content"></div>
+        <div class="modal-footer">
             <button onclick="closeModal()">
                 <i class="fa-solid fa-times"></i>
                 Close
@@ -31,72 +34,93 @@
     </div>
 </div>
 
-<div class="flex flex-row justify-center">
-    <div>
-        <h1 class="text-4xl mt-4">Stationeers Maps</h1>
-    </div>
-</div>
+<!-- App shell -->
+<div id="app">
 
-<div class="flex flex-row justify-center mt-5 mb-5 pl-10 pr-10 md:w-1/2 m-auto">
-    <div id="buttonsHeader" class="w-full grid md:grid-cols-2 md:gap-4">
-        <div id="planetButtons">
-            <button data-file="lunar">Lunar</button>
-            <button data-file="europa">Europa</button>
-            <button data-file="mars">Mars</button>
-            <button data-file="mimas">Mimas</button>
-            <button data-file="venus">Venus</button>
-            <button data-file="vulcan">Vulcan</button>
+    <!-- ── Navbar ── -->
+    <header id="navbar">
+        <div class="nav-brand">
+            <img src="/images/icon_transparent.webp" class="nav-icon" alt="">
+            <h1 class="site-title">Stationeers <span class="title-accent">Maps</span></h1>
+        </div>
+        <div class="nav-actions">
+            <button id="share" title="Share view">
+                <i class="fa-solid fa-share-nodes"></i>
+            </button>
+            <button id="themeToggle" title="Toggle theme"></button>
+        </div>
+    </header>
+
+    <!-- ── Toolbar ── -->
+    <div id="fileButtons" class="toolbar">
+        <div class="toolbar-group">
+            <span class="toolbar-label">Planet</span>
+            <div id="planetButtons">
+                <button data-file="lunar">Lunar</button>
+                <button data-file="europa">Europa</button>
+                <button data-file="mars">Mars</button>
+                <button data-file="mimas">Mimas</button>
+                <button data-file="venus">Venus</button>
+                <button data-file="vulcan">Vulcan</button>
+            </div>
         </div>
 
-        <div id="regionTypeButtons" class="mt-5 md:mt-0">
-            <button data-region="mining">Mining</button>
-            <button data-region="names">Names</button>
-            <button data-region="poi">POI</button>
-        </div>
-    </div>
-    <div>
-        <button id="share" title="Share view">
-            <i class="fa-solid fa-share-nodes"></i>
-        </button>
-        <button id="themeToggle"></button>
-    </div>
-</div>
+        <div class="toolbar-divider"></div>
 
-<div id="root" class="flex flex-row justify-center mb-10 pl-10 pr-10 flex-wrap">
-    <div id="canvasContainer" style="position: relative;">
-        <svg id="svg" style="position: absolute; top: 0; left: 0;"></svg>
-        <div id="iconLayer"
-             style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; pointer-events: none;">
+        <div class="toolbar-group">
+            <span class="toolbar-label">View</span>
+            <div id="regionTypeButtons">
+                <button data-region="mining">Mining</button>
+                <button data-region="names">Names</button>
+                <button data-region="poi">POI</button>
+            </div>
         </div>
     </div>
 
-    <div id="sidePane" class="ml-20 flex flex-row lg:flex-col mt-10 lg:mt-0">
-        <div>
-            <h3 class="text-2xl mb-3">Settings</h3>
-            <label class="block">
-                <input type="checkbox" id="toggleTerrain" checked> Terrain
-            </label>
-            <label class="block">
-                <input type="checkbox" id="toggleSpawn"> Start Locations
-            </label>
-            <label class="block">
-                <input type="checkbox" id="toggleNorth"> North Up
-            </label>
-        </div>
-        <div class="ml-3 lg:ml-0 lg:mt-10">
-            <h3 class="text-2xl mb-3">Regions</h3>
-            <div id="colorFilter"></div>
+    <!-- ── Main content ── -->
+    <main id="root">
+        <div class="canvas-wrapper">
+            <div id="canvasContainer" style="position: relative;">
+                <svg id="svg" style="position: absolute; top: 0; left: 0;"></svg>
+                <div id="iconLayer"
+                     style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; pointer-events: none;">
+                </div>
+            </div>
         </div>
 
-    </div>
+        <aside id="sidePane">
+            <div class="side-section">
+                <h3>Settings</h3>
+                <label>
+                    <input type="checkbox" id="toggleTerrain" checked>
+                    <span>Terrain</span>
+                </label>
+                <label>
+                    <input type="checkbox" id="toggleSpawn">
+                    <span>Start Locations</span>
+                </label>
+                <label>
+                    <input type="checkbox" id="toggleNorth">
+                    <span>North Up</span>
+                </label>
+            </div>
 
-    <div class="tooltip" id="tooltip"></div>
+            <div class="side-divider"></div>
 
-</div>
+            <div class="side-section">
+                <h3>Regions</h3>
+                <div id="colorFilter"></div>
+            </div>
+        </aside>
+    </main>
+
+</div><!-- /#app -->
+
+<!-- Tooltip lives at body level so pageX/pageY positioning works -->
+<div class="tooltip" id="tooltip"></div>
 
 <script type="module" src="/src/main.ts"></script>
 
 </body>
 
 </html>
-
