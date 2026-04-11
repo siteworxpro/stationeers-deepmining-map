@@ -448,7 +448,16 @@ function setupRenderFunctions(path: d3.GeoPath, width: number, height: number) {
 setCanvasSize(canvasWidth, canvasHeight)
 themeToggle?.addEventListener('click', onClickThemeToggle)
 applySettingsFromQuery(params)
+setActiveButton("#planetButtons", "data-file", currentPlanet)
+setActiveButton("#regionTypeButtons", "data-region", currentRegionType)
 loadMap(currentPlanet, currentRegionType).then(() => {})
+
+function setActiveButton(groupSelector: string, attrName: string, value: string) {
+    d3.selectAll(`${groupSelector} button`).classed("active-btn", false)
+    d3.selectAll(`${groupSelector} button`)
+        .filter(function() { return d3.select(this).attr(attrName) === value })
+        .classed("active-btn", true)
+}
 
 // Event handlers
 d3.selectAll("#planetButtons button").on("click", function () {
@@ -458,6 +467,7 @@ d3.selectAll("#planetButtons button").on("click", function () {
     selectedRegions = [0]
     saveToLocalStorage('selectedRegions', '0')
     saveToLocalStorage('planet', planet)
+    setActiveButton("#planetButtons", "data-file", planet)
     loadMap(planet, currentRegionType).then(() => {})
 })
 
@@ -465,6 +475,7 @@ d3.selectAll("#regionTypeButtons button").on("click", function () {
     selectedRegions = [0]
     currentRegionType = d3.select(this).attr("data-region")
     saveToLocalStorage('region', currentRegionType)
+    setActiveButton("#regionTypeButtons", "data-region", currentRegionType)
     updateRender()
 })
 
